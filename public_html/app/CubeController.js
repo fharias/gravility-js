@@ -9,7 +9,7 @@ gravility.controller('CubeController', ['$scope', function ($scope) {
         $scope.cube = null;
         $scope.title = "Cube Summation";
         $scope.input = null;
-        $scope.output = "";
+        $scope.output = "\n";
         $scope.createCube = function () {
             if ($scope.input !== null) {
                 var lines = $scope.input.split('\n');
