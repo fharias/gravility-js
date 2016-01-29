@@ -9,6 +9,7 @@ gravility.controller('CubeController', ['$scope', function ($scope) {
         $scope.cube = null;
         $scope.title = "Cube Summation";
         $scope.input = null;
+        $scope.output = "";
         $scope.createCube = function () {
             if ($scope.input !== null) {
                 var lines = $scope.input.split('\n');
@@ -29,7 +30,7 @@ gravility.controller('CubeController', ['$scope', function ($scope) {
                                 if(m >= 1 && m <= 1000){
                                     var test = lines.slice(i, i+m);
                                     i=i+m;
-                                    test.forEach(function(e){
+                                    angular.forEach(test, function(e){
                                         if(/^(^UPDATE|update)\s(\d{0,3}\s\d{0,3}\s\d{0,3}\s(-?\d*\.{0,1}\d+))$/
                                                 .test(e)){
                                             var update = e.split(' ');
@@ -54,12 +55,14 @@ gravility.controller('CubeController', ['$scope', function ($scope) {
                                                     && x2 >= 1 && x2 <= n 
                                                     && y2 >= 1 && y2 <= n
                                                     && z2 >= 1 && z2 <= n){
-                                                console.log(sumCube(x1,x2,y1,y2,z1,z2));
+                                                var result = sumCube(x1,x2,y1,y2,z1,z2);
+                                                $scope.output+=result.toString()+'\n';
+                                                console.log($scope.output);
                                             }
                                         }else{
                                             console.log('Format command not valid');
                                         }
-                                    });
+                                    }, $scope);
                                 }else{
                                     console.log('Query numbers not valid, try again');
                                     break;
